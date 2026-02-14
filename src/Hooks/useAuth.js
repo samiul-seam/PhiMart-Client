@@ -7,15 +7,24 @@ const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   const getToken = () => {
-    const token = localStorage.getItem("authTokens");
-    return token ? JSON.parse(token) : null;
+    try {
+      const token = localStorage.getItem("authTokens");
+      return token ? JSON.parse(token) : null;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   };
 
   const [authTokens, setAuthTokens] = useState(getToken());
 
   useEffect(() => {
-    fetchUserProfile();
-  }, [fetchUserProfile]);
+    if (authTokens) {
+      fetchUserProfile();
+    } else {
+      setUser(null);
+    }
+  }, [authTokens, fetchUserProfile]);
 
   const handleAPIError = (
     error,
