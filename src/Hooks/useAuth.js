@@ -24,7 +24,7 @@ const useAuth = () => {
     } else {
       setUser(null);
     }
-  }, [authTokens, fetchUserProfile]);
+  }, [authTokens]);
 
   const handleAPIError = (
     error,
