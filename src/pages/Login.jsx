@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import ErrorAlert from "../components/ErrorAlert";
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
-import useAuthContext from "../hooks/useAuthContext.js";
+import useAuthContext from "../hooks/useAuthContext";
 
 const Login = () => {
   const {
