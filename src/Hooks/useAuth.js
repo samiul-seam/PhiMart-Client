@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const getToken = () => {
     const token = localStorage.getItem("authTokens");
@@ -13,8 +14,8 @@ const useAuth = () => {
   const [authTokens, setAuthTokens] = useState(getToken());
 
   useEffect(() => {
-    if (authTokens) fetchUserProfile();
-  }, [authTokens]);
+    fetchUserProfile();
+  }, [fetchUserProfile]);
 
   const handleAPIError = (
     error,
@@ -35,17 +36,26 @@ const useAuth = () => {
   };
 
   // Fetch user Profile
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = useCallback(async () => {
+    if (!authTokens?.access) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await apiClient.get("/auth/users/me", {
-        headers: { Authorization: `JWT ${authTokens?.access}` },
+        headers: { Authorization: `JWT ${authTokens.access}` },
       });
       setUser(response.data);
     } catch (error) {
-      console.log("Error Fetching user", error);
-      setUser(false);
-    } 
-  };
+      console.error("Fetch profile failed", error);
+      setUser(null);
+      // Optional: localStorage.removeItem("authTokens");
+    } finally {
+      setLoading(false); // Stop loading regardless of success/fail
+    }
+  }, [authTokens]);
 
   // Update User Profile
   const updateUserProfile = async (data) => {
@@ -74,7 +84,6 @@ const useAuth = () => {
       return handleAPIError(error);
     }
   };
-
 
   // Login User
   const loginUser = async (userData) => {
@@ -108,7 +117,7 @@ const useAuth = () => {
 
   // Logout User
   const logoutUser = () => {
-    setUser(null);
+    setUser(false);
     setAuthTokens(null);
     localStorage.removeItem("authTokens");
   };
@@ -116,6 +125,7 @@ const useAuth = () => {
   return {
     user,
     errorMsg,
+    loading,
     loginUser,
     registerUser,
     logoutUser,
