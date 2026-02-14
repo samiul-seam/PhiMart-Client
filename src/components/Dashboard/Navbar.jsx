@@ -1,6 +1,6 @@
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router";
-import useAuthContext from "../../hooks/useAuthContext";
+import useAuthContext from "../../hooks/useAuthContext.js";
 
 const Navbar = ({ sidebarOpen }) => {
   const { logoutUser } = useAuthContext();
