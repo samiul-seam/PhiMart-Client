@@ -3,6 +3,8 @@ import ProductList from "./ProductList";
 import ErrorAlert from "../ErrorAlert";
 import Pagination from "./Pagination";
 import FilterSection from "./FilterSection";
+import useFetchProduct from "../../hooks/useFetchProduct";
+import useFetchCategories from "../../hooks/useFetchCategory";
 
 const ShopPage = () => {
   const [currentPage, setCurrentPage] = useState(1);

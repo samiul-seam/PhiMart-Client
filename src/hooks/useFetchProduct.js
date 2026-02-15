@@ -22,7 +22,7 @@ const useFetchProduct = (
         const response = await apiClient.get(url);
         const data = await response.data;
         const pagelimit = 10;
-
+ 
         setProducts(data.results);
         setTotalPages(Math.ceil(data.count / pagelimit));
       } catch (error) {

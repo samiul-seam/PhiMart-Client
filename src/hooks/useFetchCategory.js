@@ -10,4 +10,4 @@ const useFetchCategories = () => {
   return categories;
 };
  
-export default useFetchCategories; 
+export default useFetchCategories;  
