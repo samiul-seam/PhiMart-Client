@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import ErrorAlert from "../components/ErrorAlert";
 import { Link, useNavigate } from "react-router";
 import { useState } from "react";
-import useAuthContext from "../hooks/useAuthContext";
+import useAuthContext from "../hook/useAuthContext";
 
 const Login = () => {
   const {
@@ -22,7 +22,7 @@ const Login = () => {
       await loginUser(data);
       setTimeout(() => {
         navigate("/dashboard");
-        setLoading(false)
+        setLoading(false);
       }, 2000);
     } catch (error) {
       console.log("Login Failed", error);

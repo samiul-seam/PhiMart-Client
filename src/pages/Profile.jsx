@@ -1,11 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import useAuthContext from "../hooks/useAuthContext.js";
+import useAuthContext from "../hook/useAuthContext.js";
 import ProfileForm from "../components/Dashboard/profile/ProfileForm";
 import PasswordChangeForm from "../components/Dashboard/profile/PasswordChangeForm";
 import ProfileButtons from "../components/Dashboard/profile/ProfileButtons";
 import ErrorAlert from "../components/ErrorAlert";
-
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -13,7 +12,7 @@ const Profile = () => {
     useAuthContext();
   const {
     register,
-    handleSubmit, 
+    handleSubmit,
     watch,
     setValue,
     formState: { errors, isSubmitting },
