@@ -16,8 +16,8 @@ import ResetPasswordConfirmation from "../components/Dashboard/profile/ResetPass
 import ProductDetails from "../pages/ProductDetails";
 import Cart from "../pages/Cart";
 import Orders from "../pages/Orders";
-import PaymentSuccess from "../pages/paymentSuccess";
 import AddProduct from "../pages/AddProduct";
+import PaymentSuccess from "../pages/PaymentSuccess";
 
 const AppRoutes = () => {
   return (
@@ -41,12 +41,12 @@ const AppRoutes = () => {
             <DashboardLayout />
           </PrivateRoute>
         }
-      >
+      > 
         <Route index element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
         <Route path="cart" element={<Cart />}/>
         <Route path="orders" element={<Orders />} />
-        <Route path="payment/success" element={<PaymentSuccess />} />
+        <Route path="payment/success" element={<PaymentSuccess /> } />
         <Route path="products/add" element={<AddProduct />} />
       </Route>
     </Routes>
