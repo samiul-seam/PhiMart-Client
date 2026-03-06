@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
-
+ 
 const useFetchProduct = (
   currentPage, 
   priceRange, 
@@ -13,6 +13,7 @@ const useFetchProduct = (
   const [error, setError] = useState();
   const [totalPages, setTotalPages] = useState(0);
   
+
   useEffect(() => {
     const fetchProducts = async () => {
       setError(null);

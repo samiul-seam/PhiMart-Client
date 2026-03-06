@@ -5,7 +5,7 @@ const useAuth = () => {
   const [user, setUser] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(true);
- 
+
   const getToken = () => {
     try {
       const token = localStorage.getItem("authTokens");
@@ -13,7 +13,7 @@ const useAuth = () => {
     } catch (error) {
       console.log(error);
       return null;
-    } 
+    }
   };
 
   const [authTokens, setAuthTokens] = useState(getToken());
@@ -104,11 +104,13 @@ const useAuth = () => {
 
       // After login set user
       await fetchUserProfile();
+      return { success: true };
     } catch (error) {
       setErrorMsg(error.response.data?.detail);
+      return { success: false };
     }
   };
-
+ 
   // Register User
   const registerUser = async (userData) => {
     setErrorMsg("");
@@ -129,6 +131,7 @@ const useAuth = () => {
     setUser(false);
     setAuthTokens(null);
     localStorage.removeItem("authTokens");
+    localStorage.removeItem("cartId");
   };
 
   return {

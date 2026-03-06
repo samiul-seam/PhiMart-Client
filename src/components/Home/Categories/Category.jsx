@@ -4,10 +4,11 @@ import CategoryItem from "./CategoryItem";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
-
+ 
   useEffect(() => {
     apiClient.get("/categories").then((res) => setCategories(res.data));
-  });
+  },[]);
+
   return (
     <div>
       <section className="py-10 px-4 mx-auto w-4/5">

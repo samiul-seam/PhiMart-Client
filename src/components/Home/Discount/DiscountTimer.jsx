@@ -7,7 +7,7 @@ const DiscountTimer = () => {
   const getTimeRemaining = () => {
     const now = new Date().getTime();
     const difference = targetDate - now;
-
+ 
     return {
       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),

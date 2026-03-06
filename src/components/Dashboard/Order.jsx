@@ -1,4 +1,24 @@
+import { useEffect, useState } from "react";
+import authApiClient from "../../services/auth-api-client";
+
 const Order = () => {
+  const [orders, setOrders] = useState([]);
+
+  const statusClass = {
+    Canceled: "bg-red-500",
+    "Not Paid": "bg-secondary",
+    "Ready To Ship": "bg-warning",
+    Shipped: "bg-primary",
+    Delivered: "bg-success",
+  };
+
+  useEffect(() => {
+    authApiClient.get("/orders/").then((res) => {
+      console.log(res.data);
+      setOrders(res.data);
+    });
+  }, []);
+
   return (
     <div className="mt-6 card bg-base-100 shadow-sm">
       <div className="card-body">
@@ -15,42 +35,23 @@ const Order = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#ORD-7245</td>
-                <td>John Smith</td>
-                <td>
-                  <div className="badge badge-success">Completed</div>
-                </td>
-                <td>Mar 8, 2025</td>
-                <td>$125.00</td>
-              </tr>
-              <tr>
-                <td>#ORD-7244</td>
-                <td>Sarah Johnson</td>
-                <td>
-                  <div className="badge badge-warning">Processing</div>
-                </td>
-                <td>Mar 7, 2025</td>
-                <td>$89.99</td>
-              </tr>
-              <tr>
-                <td>#ORD-7243</td>
-                <td>Michael Brown</td>
-                <td>
-                  <div className="badge badge-info">Shipped</div>
-                </td>
-                <td>Mar 7, 2025</td>
-                <td>$245.50</td>
-              </tr>
-              <tr>
-                <td>#ORD-7242</td>
-                <td>Emily Davis</td>
-                <td>
-                  <div className="badge badge-success">Completed</div>
-                </td>
-                <td>Mar 6, 2025</td>
-                <td>$112.75</td>
-              </tr>
+              {orders.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{order.user}</td>
+                  <td>
+                    <div
+                      className={`badge text-white ${
+                        statusClass[order.status] || "bg-secondary"
+                      }`}
+                    >
+                      {order.status}
+                    </div>
+                  </td>
+                  <td>{order.created_at}</td>
+                  <td>${order.total_price}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

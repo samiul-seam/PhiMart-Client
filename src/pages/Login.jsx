@@ -19,11 +19,13 @@ const Login = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      await loginUser(data);
-      setTimeout(() => {
-        navigate("/dashboard");
-        setLoading(false);
-      }, 2000);
+      const response = await loginUser(data);
+      if (response.success) {
+        setTimeout(() => {
+          navigate("/dashboard");
+          setLoading(false);
+        }, 2000);
+      }
     } catch (error) {
       console.log("Login Failed", error);
     }

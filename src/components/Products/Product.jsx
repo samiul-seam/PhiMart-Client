@@ -62,5 +62,5 @@ const Product = () => {
     </section>
   );
 };
-
+ 
 export default Product;

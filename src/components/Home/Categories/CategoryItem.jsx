@@ -7,7 +7,7 @@ const CategoryItem = ({ category , index }) => {
     "from-purple-200 to-blue-200",
     "from-green-200 to-pink-200",
   ];
-
+ 
   return (
     <div> 
       <div className={`p-6 bg-linear-to-br ${linears[index % linears.length]}  rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer`}>

@@ -13,6 +13,11 @@ import Profile from "../pages/Profile";
 import ResentActivationMail from "../components/Registration/ResentActivationMail";
 import ResetPassword from "../components/Dashboard/profile/ResetPassword";
 import ResetPasswordConfirmation from "../components/Dashboard/profile/ResetPasswordConfimation";
+import ProductDetails from "../pages/ProductDetails";
+import Cart from "../pages/Cart";
+import Orders from "../pages/Orders";
+import PaymentSuccess from "../pages/paymentSuccess";
+import AddProduct from "../pages/AddProduct";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +32,7 @@ const AppRoutes = () => {
         <Route path="resend-activation" element={<ResentActivationMail />} />
         <Route path="reset-password" element={<ResetPassword />} />
         <Route path="password/reset/confirm/:uid/:token" element={<ResetPasswordConfirmation />} />
+        <Route path="shop/:productId" element={<ProductDetails />} />
       </Route>
       <Route
         path="dashboard"
@@ -38,6 +44,10 @@ const AppRoutes = () => {
       >
         <Route index element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="cart" element={<Cart />}/>
+        <Route path="orders" element={<Orders />} />
+        <Route path="payment/success" element={<PaymentSuccess />} />
+        <Route path="products/add" element={<AddProduct />} />
       </Route>
     </Routes>
   );

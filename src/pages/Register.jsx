@@ -23,7 +23,7 @@ const Register = () => {
       setLoading(false);
     }
   };
-
+ 
   const {
     register,
     handleSubmit,
